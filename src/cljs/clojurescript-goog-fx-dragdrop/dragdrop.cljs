@@ -24,22 +24,18 @@
 (defn drop-list-1 [event]
   (dom/set-style! (.-element (.-dropTargetItem (.-evt event))) :background "silver")
   (let [log-str [(.-data (.-dragSourceItem (.-evt event))) " dropped onto "
-                 (.-data (.-dropTargetItem (.-evt event))) " in list 1."
-                 ]]
+                 (.-data (.-dropTargetItem (.-evt event))) " in list 1."]]
     (dom/log log-str)))
 
 (defn drag-list-1 [event]
-  (let [log-str [(.-data (.-dragSourceItem (.-evt event))) " dragged from list 1"
-                 ]]
+  (let [log-str [(.-data (.-dragSourceItem (.-evt event))) " dragged from list 1"]]
     (dom/log log-str)))
 
 (defn drag-start [event]
-  (dom/set-style! (.-element (.-dragSourceItem (.-evt event))) :opacity 0.5)
-)
+  (dom/set-style! (.-element (.-dragSourceItem (.-evt event))) :opacity 0.5))
 
 (defn drag-end [event]
-  (dom/set-style! (.-element (.-dragSourceItem (.-evt event))) :opacity 1.0)
-)
+  (dom/set-style! (.-element (.-dragSourceItem (.-evt event))) :opacity 1.0))
 
 (goog-extend FooDrag goog/fx.DragDrop
              ([element opt-data]
