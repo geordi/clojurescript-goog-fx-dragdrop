@@ -31498,31 +31498,36 @@ goog.require("domina");
 goog.require("domina.css");
 goog.require("domina.css");
 goog.require("goog.fx.DragDrop");
+clojurescript_goog_fx_dragdrop.dragdrop.get_event = function get_event(event) {
+  return event.evt
+};
 clojurescript_goog_fx_dragdrop.dragdrop.drag_over = function drag_over(event) {
-  return domina.set_style_BANG_.call(null, event.evt.dropTargetItem.element, new cljs.core.Keyword(null, "background", "background", 3976677536), "red")
+  return domina.set_style_BANG_.call(null, clojurescript_goog_fx_dragdrop.dragdrop.get_event.call(null, event).dropTargetItem.element, new cljs.core.Keyword(null, "background", "background", 3976677536), "red")
 };
 clojurescript_goog_fx_dragdrop.dragdrop.drag_out = function drag_out(event) {
-  return domina.set_style_BANG_.call(null, event.evt.dropTargetItem.element, new cljs.core.Keyword(null, "background", "background", 3976677536), "silver")
+  return domina.set_style_BANG_.call(null, clojurescript_goog_fx_dragdrop.dragdrop.get_event.call(null, event).dropTargetItem.element, new cljs.core.Keyword(null, "background", "background", 3976677536), "silver")
 };
 clojurescript_goog_fx_dragdrop.dragdrop.dropp = function dropp(event) {
-  domina.set_style_BANG_.call(null, event.evt.dropTargetItem.element, new cljs.core.Keyword(null, "background", "background", 3976677536), "silver");
-  var log_str = cljs.core.PersistentVector.fromArray([event.evt.dragSourceItem.data, " dropped onto ", event.evt.dropTargetItem.data, " at ", event.evt.viewportX, "x", event.evt.viewportY], true);
+  var evt = clojurescript_goog_fx_dragdrop.dragdrop.get_event.call(null, event);
+  domina.set_style_BANG_.call(null, evt.dropTargetItem.element, new cljs.core.Keyword(null, "background", "background", 3976677536), "silver");
+  var log_str = cljs.core.PersistentVector.fromArray([evt.dragSourceItem.data, " dropped onto ", evt.dropTargetItem.data, " at ", evt.viewportX, "x", evt.viewportY], true);
   return domina.log.call(null, log_str)
 };
 clojurescript_goog_fx_dragdrop.dragdrop.drop_list_1 = function drop_list_1(event) {
-  domina.set_style_BANG_.call(null, event.evt.dropTargetItem.element, new cljs.core.Keyword(null, "background", "background", 3976677536), "silver");
-  var log_str = cljs.core.PersistentVector.fromArray([event.evt.dragSourceItem.data, " dropped onto ", event.evt.dropTargetItem.data, " in list 1."], true);
+  var evt = clojurescript_goog_fx_dragdrop.dragdrop.get_event.call(null, event);
+  domina.set_style_BANG_.call(null, evt.dropTargetItem.element, new cljs.core.Keyword(null, "background", "background", 3976677536), "silver");
+  var log_str = cljs.core.PersistentVector.fromArray([evt.dragSourceItem.data, " dropped onto ", evt.dropTargetItem.data, " in list 1."], true);
   return domina.log.call(null, log_str)
 };
 clojurescript_goog_fx_dragdrop.dragdrop.drag_list_1 = function drag_list_1(event) {
-  var log_str = cljs.core.PersistentVector.fromArray([event.evt.dragSourceItem.data, " dragged from list 1"], true);
+  var log_str = cljs.core.PersistentVector.fromArray([clojurescript_goog_fx_dragdrop.dragdrop.get_event.call(null, event).dragSourceItem.data, " dragged from list 1"], true);
   return domina.log.call(null, log_str)
 };
 clojurescript_goog_fx_dragdrop.dragdrop.drag_start = function drag_start(event) {
-  return domina.set_style_BANG_.call(null, event.evt.dragSourceItem.element, new cljs.core.Keyword(null, "opacity", "opacity", 4041665405), 0.5)
+  return domina.set_style_BANG_.call(null, clojurescript_goog_fx_dragdrop.dragdrop.get_event.call(null, event).dragSourceItem.element, new cljs.core.Keyword(null, "opacity", "opacity", 4041665405), 0.5)
 };
 clojurescript_goog_fx_dragdrop.dragdrop.drag_end = function drag_end(event) {
-  return domina.set_style_BANG_.call(null, event.evt.dragSourceItem.element, new cljs.core.Keyword(null, "opacity", "opacity", 4041665405), 1)
+  return domina.set_style_BANG_.call(null, clojurescript_goog_fx_dragdrop.dragdrop.get_event.call(null, event).dragSourceItem.element, new cljs.core.Keyword(null, "opacity", "opacity", 4041665405), 1)
 };
 clojurescript_goog_fx_dragdrop.dragdrop.FooDrag = function FooDrag(element, opt_data) {
   var this$ = this;
@@ -31552,55 +31557,55 @@ clojurescript_goog_fx_dragdrop.dragdrop.init = function init() {
     var list2 = new goog.fx.DragDropGroup;
     var nodes1 = domina.by_id.call(null, "list1").childNodes;
     var nodes2 = domina.by_id.call(null, "list2").childNodes;
-    var seq__5532_5540 = cljs.core.seq.call(null, nodes1);
-    var chunk__5533_5541 = null;
-    var count__5534_5542 = 0;
-    var i__5535_5543 = 0;
+    var seq__40278_40286 = cljs.core.seq.call(null, nodes1);
+    var chunk__40279_40287 = null;
+    var count__40280_40288 = 0;
+    var i__40281_40289 = 0;
     while(true) {
-      if(i__5535_5543 < count__5534_5542) {
-        var el_5544 = cljs.core._nth.call(null, chunk__5533_5541, i__5535_5543);
-        if(cljs.core._EQ_.call(null, 1, el_5544.nodeType) && cljs.core._EQ_.call(null, "LI", el_5544.nodeName)) {
-          list1.addItem(el_5544, el_5544.firstChild.nodeValue)
+      if(i__40281_40289 < count__40280_40288) {
+        var el_40290 = cljs.core._nth.call(null, chunk__40279_40287, i__40281_40289);
+        if(cljs.core._EQ_.call(null, 1, el_40290.nodeType) && cljs.core._EQ_.call(null, "LI", el_40290.nodeName)) {
+          list1.addItem(el_40290, el_40290.firstChild.nodeValue)
         }else {
         }
-        var G__5545 = seq__5532_5540;
-        var G__5546 = chunk__5533_5541;
-        var G__5547 = count__5534_5542;
-        var G__5548 = i__5535_5543 + 1;
-        seq__5532_5540 = G__5545;
-        chunk__5533_5541 = G__5546;
-        count__5534_5542 = G__5547;
-        i__5535_5543 = G__5548;
+        var G__40291 = seq__40278_40286;
+        var G__40292 = chunk__40279_40287;
+        var G__40293 = count__40280_40288;
+        var G__40294 = i__40281_40289 + 1;
+        seq__40278_40286 = G__40291;
+        chunk__40279_40287 = G__40292;
+        count__40280_40288 = G__40293;
+        i__40281_40289 = G__40294;
         continue
       }else {
-        var temp__4092__auto___5549 = cljs.core.seq.call(null, seq__5532_5540);
-        if(temp__4092__auto___5549) {
-          var seq__5532_5550__$1 = temp__4092__auto___5549;
-          if(cljs.core.chunked_seq_QMARK_.call(null, seq__5532_5550__$1)) {
-            var c__3848__auto___5551 = cljs.core.chunk_first.call(null, seq__5532_5550__$1);
-            var G__5552 = cljs.core.chunk_rest.call(null, seq__5532_5550__$1);
-            var G__5553 = c__3848__auto___5551;
-            var G__5554 = cljs.core.count.call(null, c__3848__auto___5551);
-            var G__5555 = 0;
-            seq__5532_5540 = G__5552;
-            chunk__5533_5541 = G__5553;
-            count__5534_5542 = G__5554;
-            i__5535_5543 = G__5555;
+        var temp__4092__auto___40295 = cljs.core.seq.call(null, seq__40278_40286);
+        if(temp__4092__auto___40295) {
+          var seq__40278_40296__$1 = temp__4092__auto___40295;
+          if(cljs.core.chunked_seq_QMARK_.call(null, seq__40278_40296__$1)) {
+            var c__3848__auto___40297 = cljs.core.chunk_first.call(null, seq__40278_40296__$1);
+            var G__40298 = cljs.core.chunk_rest.call(null, seq__40278_40296__$1);
+            var G__40299 = c__3848__auto___40297;
+            var G__40300 = cljs.core.count.call(null, c__3848__auto___40297);
+            var G__40301 = 0;
+            seq__40278_40286 = G__40298;
+            chunk__40279_40287 = G__40299;
+            count__40280_40288 = G__40300;
+            i__40281_40289 = G__40301;
             continue
           }else {
-            var el_5556 = cljs.core.first.call(null, seq__5532_5550__$1);
-            if(cljs.core._EQ_.call(null, 1, el_5556.nodeType) && cljs.core._EQ_.call(null, "LI", el_5556.nodeName)) {
-              list1.addItem(el_5556, el_5556.firstChild.nodeValue)
+            var el_40302 = cljs.core.first.call(null, seq__40278_40296__$1);
+            if(cljs.core._EQ_.call(null, 1, el_40302.nodeType) && cljs.core._EQ_.call(null, "LI", el_40302.nodeName)) {
+              list1.addItem(el_40302, el_40302.firstChild.nodeValue)
             }else {
             }
-            var G__5557 = cljs.core.next.call(null, seq__5532_5550__$1);
-            var G__5558 = null;
-            var G__5559 = 0;
-            var G__5560 = 0;
-            seq__5532_5540 = G__5557;
-            chunk__5533_5541 = G__5558;
-            count__5534_5542 = G__5559;
-            i__5535_5543 = G__5560;
+            var G__40303 = cljs.core.next.call(null, seq__40278_40296__$1);
+            var G__40304 = null;
+            var G__40305 = 0;
+            var G__40306 = 0;
+            seq__40278_40286 = G__40303;
+            chunk__40279_40287 = G__40304;
+            count__40280_40288 = G__40305;
+            i__40281_40289 = G__40306;
             continue
           }
         }else {
@@ -31608,55 +31613,55 @@ clojurescript_goog_fx_dragdrop.dragdrop.init = function init() {
       }
       break
     }
-    var seq__5536_5561 = cljs.core.seq.call(null, nodes2);
-    var chunk__5537_5562 = null;
-    var count__5538_5563 = 0;
-    var i__5539_5564 = 0;
+    var seq__40282_40307 = cljs.core.seq.call(null, nodes2);
+    var chunk__40283_40308 = null;
+    var count__40284_40309 = 0;
+    var i__40285_40310 = 0;
     while(true) {
-      if(i__5539_5564 < count__5538_5563) {
-        var el_5565 = cljs.core._nth.call(null, chunk__5537_5562, i__5539_5564);
-        if(cljs.core._EQ_.call(null, 1, el_5565.nodeType) && cljs.core._EQ_.call(null, "LI", el_5565.nodeName)) {
-          list2.addItem(el_5565, el_5565.firstChild.nodeValue)
+      if(i__40285_40310 < count__40284_40309) {
+        var el_40311 = cljs.core._nth.call(null, chunk__40283_40308, i__40285_40310);
+        if(cljs.core._EQ_.call(null, 1, el_40311.nodeType) && cljs.core._EQ_.call(null, "LI", el_40311.nodeName)) {
+          list2.addItem(el_40311, el_40311.firstChild.nodeValue)
         }else {
         }
-        var G__5566 = seq__5536_5561;
-        var G__5567 = chunk__5537_5562;
-        var G__5568 = count__5538_5563;
-        var G__5569 = i__5539_5564 + 1;
-        seq__5536_5561 = G__5566;
-        chunk__5537_5562 = G__5567;
-        count__5538_5563 = G__5568;
-        i__5539_5564 = G__5569;
+        var G__40312 = seq__40282_40307;
+        var G__40313 = chunk__40283_40308;
+        var G__40314 = count__40284_40309;
+        var G__40315 = i__40285_40310 + 1;
+        seq__40282_40307 = G__40312;
+        chunk__40283_40308 = G__40313;
+        count__40284_40309 = G__40314;
+        i__40285_40310 = G__40315;
         continue
       }else {
-        var temp__4092__auto___5570 = cljs.core.seq.call(null, seq__5536_5561);
-        if(temp__4092__auto___5570) {
-          var seq__5536_5571__$1 = temp__4092__auto___5570;
-          if(cljs.core.chunked_seq_QMARK_.call(null, seq__5536_5571__$1)) {
-            var c__3848__auto___5572 = cljs.core.chunk_first.call(null, seq__5536_5571__$1);
-            var G__5573 = cljs.core.chunk_rest.call(null, seq__5536_5571__$1);
-            var G__5574 = c__3848__auto___5572;
-            var G__5575 = cljs.core.count.call(null, c__3848__auto___5572);
-            var G__5576 = 0;
-            seq__5536_5561 = G__5573;
-            chunk__5537_5562 = G__5574;
-            count__5538_5563 = G__5575;
-            i__5539_5564 = G__5576;
+        var temp__4092__auto___40316 = cljs.core.seq.call(null, seq__40282_40307);
+        if(temp__4092__auto___40316) {
+          var seq__40282_40317__$1 = temp__4092__auto___40316;
+          if(cljs.core.chunked_seq_QMARK_.call(null, seq__40282_40317__$1)) {
+            var c__3848__auto___40318 = cljs.core.chunk_first.call(null, seq__40282_40317__$1);
+            var G__40319 = cljs.core.chunk_rest.call(null, seq__40282_40317__$1);
+            var G__40320 = c__3848__auto___40318;
+            var G__40321 = cljs.core.count.call(null, c__3848__auto___40318);
+            var G__40322 = 0;
+            seq__40282_40307 = G__40319;
+            chunk__40283_40308 = G__40320;
+            count__40284_40309 = G__40321;
+            i__40285_40310 = G__40322;
             continue
           }else {
-            var el_5577 = cljs.core.first.call(null, seq__5536_5571__$1);
-            if(cljs.core._EQ_.call(null, 1, el_5577.nodeType) && cljs.core._EQ_.call(null, "LI", el_5577.nodeName)) {
-              list2.addItem(el_5577, el_5577.firstChild.nodeValue)
+            var el_40323 = cljs.core.first.call(null, seq__40282_40317__$1);
+            if(cljs.core._EQ_.call(null, 1, el_40323.nodeType) && cljs.core._EQ_.call(null, "LI", el_40323.nodeName)) {
+              list2.addItem(el_40323, el_40323.firstChild.nodeValue)
             }else {
             }
-            var G__5578 = cljs.core.next.call(null, seq__5536_5571__$1);
-            var G__5579 = null;
-            var G__5580 = 0;
-            var G__5581 = 0;
-            seq__5536_5561 = G__5578;
-            chunk__5537_5562 = G__5579;
-            count__5538_5563 = G__5580;
-            i__5539_5564 = G__5581;
+            var G__40324 = cljs.core.next.call(null, seq__40282_40317__$1);
+            var G__40325 = null;
+            var G__40326 = 0;
+            var G__40327 = 0;
+            seq__40282_40307 = G__40324;
+            chunk__40283_40308 = G__40325;
+            count__40284_40309 = G__40326;
+            i__40285_40310 = G__40327;
             continue
           }
         }else {

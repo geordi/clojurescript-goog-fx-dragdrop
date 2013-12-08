@@ -7,35 +7,40 @@
   (:use-macros [clojurescript-goog-fx-dragdrop.macros :only [goog-extend]]
                [cljs.core :only [this-as]]))
 
+(defn get-event [event]
+  (.-evt event))
+
 (defn drag-over [event]
-  (dom/set-style! (.-element (.-dropTargetItem (.-evt event))) :background "red"))
+  (dom/set-style! (.. (get-event event) -dropTargetItem -element) :background "red"))
 
 (defn drag-out [event]
-  (dom/set-style! (.-element (.-dropTargetItem (.-evt event))) :background "silver"))
+  (dom/set-style! (.. (get-event event) -dropTargetItem -element) :background "silver"))
 
 (defn dropp [event]
-  (dom/set-style! (.-element (.-dropTargetItem (.-evt event))) :background "silver")
-  (let [log-str [(.-data (.-dragSourceItem (.-evt event))) " dropped onto "
-                 (.-data (.-dropTargetItem (.-evt event))) " at "
-                 (.-viewportX (.-evt event)) "x"
-                 (.-viewportY (.-evt event))]]
-    (dom/log log-str)))
+  (let [evt (get-event event)]
+    (dom/set-style! (.. evt -dropTargetItem -element) :background "silver")
+    (let [log-str [(.-data (.-dragSourceItem evt)) " dropped onto "
+                   (.-data (.-dropTargetItem evt)) " at "
+                   (.-viewportX evt) "x"
+                   (.-viewportY evt)]]
+      (dom/log log-str))))
 
 (defn drop-list-1 [event]
-  (dom/set-style! (.-element (.-dropTargetItem (.-evt event))) :background "silver")
-  (let [log-str [(.-data (.-dragSourceItem (.-evt event))) " dropped onto "
-                 (.-data (.-dropTargetItem (.-evt event))) " in list 1."]]
-    (dom/log log-str)))
+  (let [evt (get-event event)]
+    (dom/set-style! (.. evt -dropTargetItem -element) :background "silver")
+    (let [log-str [(.. evt -dragSourceItem -data) " dropped onto "
+                   (.. evt -dropTargetItem -data) " in list 1."]]
+      (dom/log log-str))))
 
 (defn drag-list-1 [event]
-  (let [log-str [(.-data (.-dragSourceItem (.-evt event))) " dragged from list 1"]]
+  (let [log-str [(.. (get-event event) -dragSourceItem -data) " dragged from list 1"]]
     (dom/log log-str)))
 
 (defn drag-start [event]
-  (dom/set-style! (.-element (.-dragSourceItem (.-evt event))) :opacity 0.5))
+  (dom/set-style! (.. (get-event event) -dragSourceItem -element) :opacity 0.5))
 
 (defn drag-end [event]
-  (dom/set-style! (.-element (.-dragSourceItem (.-evt event))) :opacity 1.0))
+  (dom/set-style! (.. (get-event event) -dragSourceItem -element) :opacity 1.0))
 
 (goog-extend FooDrag goog/fx.DragDrop
              ([element opt-data]
