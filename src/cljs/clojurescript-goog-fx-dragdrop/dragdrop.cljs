@@ -19,8 +19,8 @@
 (defn dropp [event]
   (let [evt (get-event event)]
     (dom/set-style! (.. evt -dropTargetItem -element) :background "silver")
-    (let [log-str [(.-data (.-dragSourceItem evt)) " dropped onto "
-                   (.-data (.-dropTargetItem evt)) " at "
+    (let [log-str [(.. evt -dragSourceItem -data) " dropped onto "
+                   (.. evt -dropTargetItem -data) " at "
                    (.-viewportX evt) "x"
                    (.-viewportY evt)]]
       (dom/log log-str))))
